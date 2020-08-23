@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>fight on the beat</title>
-    <script src="index.js"></script>
+    <style>
+     html, body {
+            background: #000;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+    
+        }
+        body {
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+        }
+        canvas { 
+            background: #000;
+            margin: auto;
+            border: 3px solid grey;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            image-rendering: -moz-crisp-edges;
+            /* width: 400px; */
+            height: 50%;
+        }
+        </style>
 </head>
 <body>
-    
+    <canvas id="canvas" width="256" height="224"></canvas>
+    <script src="index.js"></script>
 </body>
 </html>
