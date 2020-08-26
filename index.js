@@ -10,7 +10,6 @@ var imgs = function(pos) {
     parado.onload = function() {
         ctx.drawImage(parado, pos, 140);
     };
-    return parado
 }
 
 const canvas = document.getElementById('canvas')
@@ -22,10 +21,16 @@ ctx.font = "10px Arial";
 ctx.fillText(actionList, 10, 214);
 
 document.addEventListener('keydown', (event)=>{
-    actionList.push(event.key)
+    const keys = ["a","d","j","k","l"]
+    for (i in keys) {
+        if (keys[i] == event.key.toLowerCase()) {
+            actionList.push(event.key)
+
+            ctx.clearRect(0,210,8000,8000)
+            ctx.fillText(actionList, 10, 214);
+        }
+    }
     // console.log(actionList)
-    ctx.clearRect(0,210,8000,8000)
-    ctx.fillText(actionList, 10, 214);
 })
 
 function loop() {
