@@ -47,11 +47,16 @@ function setup() {
     
     state = play
     player = new PIXI.Sprite(PIXI.loader.resources["./cabaleiro-1.png"].texture);
+    enemy = new PIXI.Sprite(PIXI.loader.resources["./cabaleiro-1.png"].texture);
     
     app.stage.addChild(player);
-    
+    app.stage.addChild(enemy);
+    enemy.scale.x = -1;
     player.x = 0
     player.y = 140
+
+    enemy.x = 270-30
+    enemy.y = 140
 
     app.ticker.add(delta => gameLoop(delta));
 }
@@ -94,11 +99,18 @@ function move(key) {
         j() {
             // app.view.fillRect(player.x+30,140,30,40)
             player.texture = PIXI.loader.resources["./cabaleiro-2.png"].texture
+            Dano(player.x)
         }
     }
     
     const pleh = moves[key.toLowerCase()]
     if (pleh) {
         pleh()
+    }
+}
+
+function Dano(pos) {
+    if (pos+30 == enemy.x-30) {
+        enemy.x += 30
     }
 }
