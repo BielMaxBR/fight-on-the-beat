@@ -1,6 +1,7 @@
-let player,state 
 var tempo = 0
 var VR = 60/120
+var actionList= []
+let player,state 
 let Application = PIXI.Application,
 loader = PIXI.loader,
 resources = PIXI.loader.resources,
@@ -24,13 +25,21 @@ PIXI.loader
 .on("progress", loadProgressHandler)
 .load(setup);
 
-
+document.addEventListener('keydown', (event)=>{
+    const keys = ["a","d","j","k","l"]
+    for (i in keys) {
+        if (keys[i] == event.key.toLowerCase()) {
+            actionList.push(event.key)
+        }
+    }
+})
 
 function loadProgressHandler(loader, resource) {
     console.log("loading: " + resource.url); 
     
     console.log("progress: " + loader.progress + "%"); 
 }
+
 function setup() {
     
     state = play
@@ -58,8 +67,31 @@ function play(delta) {
 }
 
 function forBeat() {
-    player.x += 30
+    if (actionList.length > 0) {
+        move(actionList[0])
+        
+        actionList = actionList.slice(1,actionList.length)
+    }
     if (player.x > 270) {
         player.x = 0
+    }
+}
+
+function move(key) {
+    const moves = {
+        a() {
+            player.x -= 30
+        },
+        d() {
+            player.x += 30
+        },
+        j() {
+            // app.view.fillRect(player.x+30,140,30,40)
+        }
+    }
+    
+    const pleh = moves[key.toLowerCase()]
+    if (pleh) {
+        pleh()
     }
 }
