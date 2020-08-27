@@ -10,7 +10,6 @@ var imgs = function(pos) {
     parado.onload = function() {
         ctx.drawImage(parado, pos, 140);
     };
-    return parado
 }
 
 const canvas = document.getElementById('canvas')
@@ -22,24 +21,31 @@ ctx.font = "10px Arial";
 ctx.fillText(actionList, 10, 214);
 
 document.addEventListener('keydown', (event)=>{
-    actionList.push(event.key)
+    const keys = ["a","d","j","k","l"]
+    for (i in keys) {
+        if (keys[i] == event.key.toLowerCase()) {
+            actionList.push(event.key)
+
+            ctx.clearRect(0,210,8000,8000)
+            ctx.fillText(actionList, 10, 214);
+        }
+    }
     // console.log(actionList)
-    ctx.clearRect(0,210,8000,8000)
-    ctx.fillText(actionList, 10, 214);
 })
 
 function loop() {
+    ctx.clearRect(0,0,8000,8000)
     if (actionList.length > 0) {
+
         console.log(actionList[0])
-        ctx.clearRect(0,0,8000,8000)
         move(actionList[0])
         console.log(player)
-        imgs(player[1])
         // ctx.fillRect(player[1],140,30,40)
         ctx.font = "10px pixel";
         actionList = actionList.slice(1,actionList.length)
         ctx.fillText(actionList, 10, 214);
     }
+    imgs(player[1])
     setTimeout(loop, 1000/bpm*60)
 }
 
@@ -52,8 +58,8 @@ function move(key) {
         d() {
             player[1] += 30
         },
-        g() {
-            canvas.width = 800
+        j() {
+            ctx.fillRect(player[1]+30,140,30,40)
         }
     }
     
