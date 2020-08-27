@@ -19,9 +19,12 @@ let app = new Application({
 
 document.body.appendChild(app.view);
 
-
+const sprites = [
+    "./cabaleiro-1.png",
+    "./cabaleiro-2.png",
+]
 PIXI.loader
-.add("./cabaleiro-1.png")
+.add(sprites)
 .on("progress", loadProgressHandler)
 .load(setup);
 
@@ -67,6 +70,9 @@ function play(delta) {
 }
 
 function forBeat() {
+    if (player.texture.textureCacheIds[0] == "./cabaleiro-2.png") {
+        player.texture = PIXI.loader.resources["./cabaleiro-1.png"].texture
+    }
     if (actionList.length > 0) {
         move(actionList[0])
         
@@ -87,6 +93,7 @@ function move(key) {
         },
         j() {
             // app.view.fillRect(player.x+30,140,30,40)
+            player.texture = PIXI.loader.resources["./cabaleiro-2.png"].texture
         }
     }
     
