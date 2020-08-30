@@ -31,7 +31,7 @@ PIXI.loader
 document.addEventListener('keydown', (event)=>{
     const keys = ["a","d","j","k","l"]
     for (i in keys) {
-        if (keys[i] == event.key.toLowerCase()) {
+        if (keys[i] == event.key.toLowerCase() && actionList.length == 0) {
             actionList.push(event.key)
         }
     }
